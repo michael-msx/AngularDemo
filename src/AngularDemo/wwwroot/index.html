@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html ng-app="heroesApp">
+<head>
+    <meta charset="utf-8" />
+    <title>Dota 2 Heroes</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-resource.js"></script>
+    <script>
+
+        var app = angular.module('heroesApp', []);
+
+        app.controller('heroesController', function ($scope, $http) {
+            $http.get('/api/heroes').success(function (response) {
+                $scope.Heroes = response;
+            });
+        });
+
+    </script>
+
+</head>
+<body ng-cloak>
+    <div ng-controller="heroesController">
+        <h1>Dota Heroes</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="hero in Heroes">
+                    <td>{{hero.ID}}</td>
+                    <td>{{hero.Name}}</td>
+                    <td>{{hero.Type}}</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</body>
+</html>
